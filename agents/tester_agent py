@@ -1,0 +1,11 @@
+import importlib.util
+
+class TesterAgent:
+    def test(self, task):
+        try:
+            spec = importlib.util.spec_from_file_location("mod", task["path"])
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            return True
+        except Exception:
+            return False
